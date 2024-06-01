@@ -1,0 +1,59 @@
+columns:
+  - User_ID: category
+  - Product_ID: category
+  - Gender: category
+  - Age: category
+  - Occupation: category
+  - City_Category: category
+  - Stay_In_Current_City_Years: category
+  - region_of_employment: category
+  - Marital_Status: category
+  - Product_Category_1: category
+  - Product_Category_2: category
+  - Product_Category_3: category
+  - Purchase: int
+
+numerical_columns:
+  - Purchase
+
+categorical_columns:
+  - User_ID
+  - Product_ID
+  - Gender
+  - Age
+  - Occupation
+  - City_Category
+  - Stay_In_Current_City_Years
+  - region_of_employment
+  - Marital_Status
+  - Product_Category_1
+  - Product_Category_2
+  - Product_Category_3
+
+drop_columns:
+  - User_ID
+
+# for data transformation
+num_features:
+  - no_of_employees
+  - prevailing_wage
+  - company_age
+
+or_columns:
+  - has_job_experience
+  - requires_job_training
+  - full_time_position
+  - education_of_employee
+
+oh_columns:
+  - continent
+  - unit_of_wage
+  - region_of_employment
+
+transform_columns:
+  - no_of_employees
+  - company_age
+
+
+
+
