@@ -8,7 +8,7 @@ from black_friday.entity.config_entity import DataIngestionConfig
 from black_friday.entity.artifact_entity import DataIngestionArtifact
 from black_friday.exception import BlackfridayException
 from black_friday.logger import logging
-from black_friday.data_access.Blackfriday_data import BlackfridayData
+from black_friday.data_access.blackfriday_data import BlackfridayData
 
 class DataIngestion:
     def __init__(self,data_ingestion_config:DataIngestionConfig=DataIngestionConfig()):
