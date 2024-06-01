@@ -53,4 +53,3 @@ oh_columns:
 transform_columns:
   - no_of_employees
   - company_age
-
