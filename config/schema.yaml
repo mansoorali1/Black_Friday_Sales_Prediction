@@ -60,11 +60,3 @@ transform_columns:
   - company_age
 
 
-
-
-
-
-
-transform_columns:
-  - no_of_employees
-  - company_age
