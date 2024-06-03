@@ -63,14 +63,6 @@ transform_columns:
 
 
 
-
-
-# for data transformation
-num_features:
-  - no_of_employees
-  - prevailing_wage
-  - company_age
-
 or_columns:
   - has_job_experience
   - requires_job_training
