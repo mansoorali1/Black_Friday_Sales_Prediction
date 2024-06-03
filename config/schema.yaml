@@ -63,9 +63,6 @@ transform_columns:
 
 
 
-  - full_time_position
-  - education_of_employee
-
 oh_columns:
   - continent
   - unit_of_wage
