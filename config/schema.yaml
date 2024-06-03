@@ -63,8 +63,7 @@ transform_columns:
 
 
 
-  - unit_of_wage
-  - region_of_employment
+
 
 transform_columns:
   - no_of_employees
