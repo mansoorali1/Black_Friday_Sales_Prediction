@@ -8,7 +8,7 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder, OrdinalEncoder,
 from sklearn.compose import ColumnTransformer
 
 from black_friday.constants import TARGET_COLUMN, SCHEMA_FILE_PATH, CURRENT_YEAR
-from us_visa.entity.config_entity import DataTransformationConfig
+from black_friday.entity.config_entity import DataTransformationConfig
 from us_visa.entity.artifact_entity import DataTransformationArtifact, DataIngestionArtifact, DataValidationArtifact
 from us_visa.exception import USvisaException
 from us_visa.logger import logging
