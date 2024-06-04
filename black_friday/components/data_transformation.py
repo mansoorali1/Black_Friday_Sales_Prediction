@@ -10,7 +10,7 @@ from sklearn.compose import ColumnTransformer
 from black_friday.constants import TARGET_COLUMN, SCHEMA_FILE_PATH, CURRENT_YEAR
 from black_friday.entity.config_entity import DataTransformationConfig
 from black_friday.entity.artifact_entity import DataTransformationArtifact, DataIngestionArtifact, DataValidationArtifact
-from us_visa.exception import USvisaException
+from black_friday.exception import USvisaException
 from us_visa.logger import logging
 from us_visa.utils.main_utils import save_object, save_numpy_array_data, read_yaml_file, drop_columns
 from us_visa.entity.estimator import TargetValueMapping
