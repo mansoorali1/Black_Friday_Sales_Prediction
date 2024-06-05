@@ -32,14 +32,9 @@ categorical_columns:
 
 drop_columns:
   - User_ID
-
+  - Product_Category_3
 
 # for data transformation
-num_features:
-  - no_of_employees
-  - prevailing_wage
-  - company_age
-
 or_columns:
   - Age
   - Stay_In_Current_City_Years
