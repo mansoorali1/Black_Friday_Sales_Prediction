@@ -48,7 +48,6 @@ oh_columns:
   - Product_Category_2
 
 
-
 transform_columns:
   - no_of_employees
   - company_age
