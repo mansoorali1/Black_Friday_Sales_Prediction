@@ -1,6 +1,6 @@
-from black_friday.configuration.mongo_db_connection import MongoDBClient
-from black_friday.constants import DATABASE_NAME
-from black_friday.exception import USvisaException
+from us_visa.configuration.mongo_db_connection import MongoDBClient
+from us_visa.constants import DATABASE_NAME
+from us_visa.exception import USvisaException
 import pandas as pd
 import sys
 from typing import Optional
@@ -8,7 +8,7 @@ import numpy as np
 
 
 
-class BlackFridayData:
+class USvisaData:
     """
     This class help to export entire mongo db record as pandas dataframe
     """

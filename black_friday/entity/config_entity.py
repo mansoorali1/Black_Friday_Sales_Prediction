@@ -1,5 +1,5 @@
 import os
-from black_friday.constants import *
+from us_visa.constants import *
 from dataclasses import dataclass
 from datetime import datetime
 

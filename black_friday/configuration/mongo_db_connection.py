@@ -1,10 +1,10 @@
 import sys
 
-from black_friday.exception import USvisaException
-from black_friday.logger import logging
+from us_visa.exception import USvisaException
+from us_visa.logger import logging
 
 import os
-from black_friday.constants import DATABASE_NAME, MONGODB_URL_KEY
+from us_visa.constants import DATABASE_NAME, MONGODB_URL_KEY
 import pymongo
 import certifi
 
