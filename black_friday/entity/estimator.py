@@ -3,8 +3,8 @@ import sys
 from pandas import DataFrame
 from sklearn.pipeline import Pipeline
 
-from us_visa.exception import USvisaException
-from us_visa.logger import logging
+from black_friday.exception import BlackFridayException
+from black_friday.logger import logging
 
 class TargetValueMapping:
     def __init__(self):
@@ -20,7 +20,7 @@ class TargetValueMapping:
 
 
 
-class USvisaModel:
+class BlackFridayModel:
     def __init__(self, preprocessing_object: Pipeline, trained_model_object: object):
         """
         :param preprocessing_object: Input Object of preprocesser
@@ -46,7 +46,7 @@ class USvisaModel:
             return self.trained_model_object.predict(transformed_feature)  
 
         except Exception as e:
-            raise USvisaException(e, sys) from e
+            raise BlackFridayException(e, sys) from e
 
     def __repr__(self):
         return f"{type(self.trained_model_object).__name__}()"

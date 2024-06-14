@@ -1,5 +1,5 @@
 import os
-from us_visa.constants import *
+from black_friday.constants import *
 from dataclasses import dataclass
 from datetime import datetime
 
@@ -73,6 +73,6 @@ class ModelPusherConfig:
 
 
 @dataclass
-class USvisaPredictorConfig:
+class BlackFridayPredictorConfig:
     model_file_path: str = MODEL_FILE_NAME
     model_bucket_name: str = MODEL_BUCKET_NAME

@@ -7,13 +7,13 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, OrdinalEncoder, PowerTransformer
 from sklearn.compose import ColumnTransformer
 
-from us_visa.constants import TARGET_COLUMN, SCHEMA_FILE_PATH, CURRENT_YEAR
-from us_visa.entity.config_entity import DataTransformationConfig
-from us_visa.entity.artifact_entity import DataTransformationArtifact, DataIngestionArtifact, DataValidationArtifact
-from us_visa.exception import USvisaException
-from us_visa.logger import logging
-from us_visa.utils.main_utils import save_object, save_numpy_array_data, read_yaml_file, drop_columns
-from us_visa.entity.estimator import TargetValueMapping
+from black_friday.constants import TARGET_COLUMN, SCHEMA_FILE_PATH, CURRENT_YEAR
+from black_friday.entity.config_entity import DataTransformationConfig
+from black_friday.entity.artifact_entity import DataTransformationArtifact, DataIngestionArtifact, DataValidationArtifact
+from black_friday.exception import BlackFridayException
+from black_friday.logger import logging
+from black_friday.utils.main_utils import save_object, save_numpy_array_data, read_yaml_file, drop_columns
+from black_friday.entity.estimator import TargetValueMapping
 
 class DataTransformation:
     def __init__(self, data_ingestion_artifact: DataIngestionArtifact,
@@ -29,14 +29,14 @@ class DataTransformation:
             self.data_validation_artifact = data_validation_artifact
             self._schema_config = read_yaml_file(file_path=SCHEMA_FILE_PATH)
         except Exception as e:
-            raise USvisaException(e, sys)
+            raise BlackFridayException(e, sys)
 
     @staticmethod
     def read_data(file_path) -> pd.DataFrame:
         try:
             return pd.read_csv(file_path)
         except Exception as e:
-            raise USvisaException(e, sys)
+            raise BlackFridayException(e, sys)
 
     
     def get_data_transformer_object(self) -> Pipeline:
@@ -87,7 +87,7 @@ class DataTransformation:
             return preprocessor
 
         except Exception as e:
-            raise USvisaException(e, sys) from e
+            raise BlackFridayException(e, sys) from e
 
     def initiate_data_transformation(self, ) -> DataTransformationArtifact:
         """
@@ -207,4 +207,4 @@ class DataTransformation:
                 raise Exception(self.data_validation_artifact.message)
 
         except Exception as e:
-            raise USvisaException(e, sys) from e
+            raise BlackFridayException(e, sys) from e

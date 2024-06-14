@@ -4,7 +4,7 @@ from datetime import date
 DATABASE_NAME = "BLACK_FRIDAY"
 
 COLLECTION_NAME = "bfriday_test"
-COLLECTION_NAME_VALID = "bfriday_train"
+#COLLECTION_NAME_VALID = "bfriday_train"
 
 
 MONGODB_URL_KEY = "MONGODB_URL"
@@ -14,8 +14,8 @@ ARTIFACT_DIR: str = "artifact"
 
 MODEL_FILE_NAME = "model.pkl"
 
-TARGET_COLUMN = "case_status"
-CURRENT_YEAR = date.today().year
+TARGET_COLUMN = "Purchase"
+#CURRENT_YEAR = date.today().year
 PREPROCSSING_OBJECT_FILE_NAME = "preprocessing.pkl"
 
 FILE_NAME: str = "blackfriday.csv"
