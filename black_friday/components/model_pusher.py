@@ -1,11 +1,11 @@
 import sys
 
-from us_visa.cloud_storage.aws_storage import SimpleStorageService
-from us_visa.exception import USvisaException
-from us_visa.logger import logging
-from us_visa.entity.artifact_entity import ModelPusherArtifact, ModelEvaluationArtifact
-from us_visa.entity.config_entity import ModelPusherConfig
-from us_visa.entity.s3_estimator import USvisaEstimator
+from black_friday.cloud_storage.aws_storage import SimpleStorageService
+from black_friday.exception import BlackFridayException
+from black_friday.logger import logging
+from black_friday.entity.artifact_entity import ModelPusherArtifact, ModelEvaluationArtifact
+from black_friday.entity.config_entity import ModelPusherConfig
+from black_friday.entity.s3_estimator import BlackFridayEstimator
 
 
 class ModelPusher:
@@ -18,7 +18,7 @@ class ModelPusher:
         self.s3 = SimpleStorageService()
         self.model_evaluation_artifact = model_evaluation_artifact
         self.model_pusher_config = model_pusher_config
-        self.usvisa_estimator = USvisaEstimator(bucket_name=model_pusher_config.bucket_name,
+        self.usvisa_estimator = BlackFridayEstimator(bucket_name=model_pusher_config.bucket_name,
                                 model_path=model_pusher_config.s3_model_key_path)
 
     def initiate_model_pusher(self) -> ModelPusherArtifact:
@@ -46,4 +46,4 @@ class ModelPusher:
             
             return model_pusher_artifact
         except Exception as e:
-            raise USvisaException(e, sys) from e
+            raise BlackFridayException(e, sys) from e

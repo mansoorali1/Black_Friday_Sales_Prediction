@@ -3,15 +3,15 @@ import sys
 
 import numpy as np
 import pandas as pd
-from us_visa.entity.config_entity import USvisaPredictorConfig
-from us_visa.entity.s3_estimator import USvisaEstimator
-from us_visa.exception import USvisaException
-from us_visa.logger import logging
-from us_visa.utils.main_utils import read_yaml_file
+from black_friday.entity.config_entity import BlackFridayPredictorConfig
+from black_friday.entity.s3_estimator import BlackFridayEstimator
+from black_friday.exception import BlackFridayException
+from black_friday.logger import logging
+from black_friday.utils.main_utils import read_yaml_file
 from pandas import DataFrame
 
 
-class USvisaData:
+class BlackFridayData:
     def __init__(self,
                 continent,
                 education_of_employee,
@@ -42,7 +42,7 @@ class USvisaData:
 
 
         except Exception as e:
-            raise USvisaException(e, sys) from e
+            raise BlackFridayException(e, sys) from e
 
     def get_usvisa_input_data_frame(self)-> DataFrame:
         """
@@ -54,7 +54,7 @@ class USvisaData:
             return DataFrame(usvisa_input_dict)
         
         except Exception as e:
-            raise USvisaException(e, sys) from e
+            raise BlackFridayException(e, sys) from e
 
 
     def get_usvisa_data_as_dict(self):
@@ -84,10 +84,10 @@ class USvisaData:
             return input_data
 
         except Exception as e:
-            raise USvisaException(e, sys) from e
+            raise BlackFridayException(e, sys) from e
 
-class USvisaClassifier:
-    def __init__(self,prediction_pipeline_config: USvisaPredictorConfig = USvisaPredictorConfig(),) -> None:
+class BlackFridayPredictor:
+    def __init__(self,prediction_pipeline_config: BlackFridayPredictorConfig = BlackFridayPredictorConfig(),) -> None:
         """
         :param prediction_pipeline_config: Configuration for prediction the value
         """
@@ -95,7 +95,7 @@ class USvisaClassifier:
             # self.schema_config = read_yaml_file(SCHEMA_FILE_PATH)
             self.prediction_pipeline_config = prediction_pipeline_config
         except Exception as e:
-            raise USvisaException(e, sys)
+            raise BlackFridayException(e, sys)
 
     def predict(self, dataframe) -> str:
         """
@@ -104,7 +104,7 @@ class USvisaClassifier:
         """
         try:
             logging.info("Entered predict method of USvisaClassifier class")
-            model = USvisaEstimator(
+            model = BlackFridayEstimator(
                 bucket_name=self.prediction_pipeline_config.model_bucket_name,
                 model_path=self.prediction_pipeline_config.model_file_path,
             )
@@ -113,4 +113,4 @@ class USvisaClassifier:
             return result
         
         except Exception as e:
-            raise USvisaException(e, sys)
+            raise BlackFridayException(e, sys)

@@ -9,9 +9,9 @@ from uvicorn import run as app_run
 
 from typing import Optional
 
-from us_visa.constants import APP_HOST, APP_PORT
-from us_visa.pipeline.prediction_pipeline import USvisaData, USvisaClassifier
-from us_visa.pipeline.training_pipeline import TrainPipeline
+from black_friday.constants import APP_HOST, APP_PORT
+from black_friday.pipeline.prediction_pipeline import BlackFridayData, BlackFridayPredictor
+from black_friday.pipeline.training_pipeline import TrainPipeline
 
 app = FastAPI()
 
@@ -83,7 +83,7 @@ async def predictRouteClient(request: Request):
         form = DataForm(request)
         await form.get_usvisa_data()
         
-        usvisa_data = USvisaData(
+        usvisa_data = BlackFridayData(
                                 continent= form.continent,
                                 education_of_employee = form.education_of_employee,
                                 has_job_experience = form.has_job_experience,
@@ -98,7 +98,7 @@ async def predictRouteClient(request: Request):
         
         usvisa_df = usvisa_data.get_usvisa_input_data_frame()
 
-        model_predictor = USvisaClassifier()
+        model_predictor = BlackFridayPredictor()
 
         value = model_predictor.predict(dataframe=usvisa_df)[0]
 

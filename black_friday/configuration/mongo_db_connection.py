@@ -1,10 +1,10 @@
 import sys
 
-from us_visa.exception import USvisaException
-from us_visa.logger import logging
+from black_friday.exception import BlackFridayException
+from black_friday.logger import logging
 
 import os
-from us_visa.constants import DATABASE_NAME, MONGODB_URL_KEY
+from black_friday.constants import DATABASE_NAME, MONGODB_URL_KEY
 import pymongo
 import certifi
 
@@ -32,4 +32,4 @@ class MongoDBClient:
             self.database_name = database_name
             logging.info("MongoDB connection succesfull")
         except Exception as e:
-            raise USvisaException(e,sys)
+            raise BlackFridayException(e,sys)

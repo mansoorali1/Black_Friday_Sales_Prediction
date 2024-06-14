@@ -1,15 +1,15 @@
 import sys
-from us_visa.exception import USvisaException
-from us_visa.logger import logging
+from black_friday.exception import BlackFridayException
+from black_friday.logger import logging
 
-from us_visa.components.data_ingestion import DataIngestion
-from us_visa.components.data_validation import DataValidation
-from us_visa.components.data_transformation import DataTransformation
-from us_visa.components.model_trainer import ModelTrainer
-from us_visa.components.model_evaluation import ModelEvaluation
-from us_visa.components.model_pusher import ModelPusher
+from black_friday.components.data_ingestion import DataIngestion
+from black_friday.components.data_validation import DataValidation
+from black_friday.components.data_transformation import DataTransformation
+from black_friday.components.model_trainer import ModelTrainer
+from black_friday.components.model_evaluation import ModelEvaluation
+from black_friday.components.model_pusher import ModelPusher
 
-from us_visa.entity.config_entity import (DataIngestionConfig,
+from black_friday.entity.config_entity import (DataIngestionConfig,
                                           DataValidationConfig,
                                           DataTransformationConfig,
                                           ModelTrainerConfig,
@@ -17,7 +17,7 @@ from us_visa.entity.config_entity import (DataIngestionConfig,
                                           ModelPusherConfig)
                                           
 
-from us_visa.entity.artifact_entity import (DataIngestionArtifact,
+from black_friday.entity.artifact_entity import (DataIngestionArtifact,
                                             DataValidationArtifact,
                                             DataTransformationArtifact,
                                             ModelTrainerArtifact,
@@ -52,7 +52,7 @@ class TrainPipeline:
             )
             return data_ingestion_artifact
         except Exception as e:
-            raise USvisaException(e, sys) from e
+            raise BlackFridayException(e, sys) from e
         
     
 
@@ -78,7 +78,7 @@ class TrainPipeline:
             return data_validation_artifact
 
         except Exception as e:
-            raise USvisaException(e, sys) from e
+            raise BlackFridayException(e, sys) from e
         
 
 
@@ -95,7 +95,7 @@ class TrainPipeline:
             data_transformation_artifact = data_transformation.initiate_data_transformation()
             return data_transformation_artifact
         except Exception as e:
-            raise USvisaException(e, sys)
+            raise BlackFridayException(e, sys)
         
 
     
@@ -111,7 +111,7 @@ class TrainPipeline:
             return model_trainer_artifact
 
         except Exception as e:
-            raise USvisaException(e, sys)
+            raise BlackFridayException(e, sys)
         
     
 
@@ -127,7 +127,7 @@ class TrainPipeline:
             model_evaluation_artifact = model_evaluation.initiate_model_evaluation()
             return model_evaluation_artifact
         except Exception as e:
-            raise USvisaException(e, sys)
+            raise BlackFridayException(e, sys)
         
 
     
@@ -143,7 +143,7 @@ class TrainPipeline:
             model_pusher_artifact = model_pusher.initiate_model_pusher()
             return model_pusher_artifact
         except Exception as e:
-            raise USvisaException(e, sys)
+            raise BlackFridayException(e, sys)
 
         
 
@@ -168,4 +168,4 @@ class TrainPipeline:
 
         
         except Exception as e:
-            raise USvisaException(e, sys)
+            raise BlackFridayException(e, sys)
