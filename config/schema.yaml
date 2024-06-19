@@ -1,19 +1,24 @@
 columns:
-  - User_ID: category
+  - User_ID: int
   - Product_ID: category
   - Gender: category
   - Age: category
-  - Occupation: category
+  - Occupation: int
   - City_Category: category
   - Stay_In_Current_City_Years: category
-  - region_of_employment: category
-  - Marital_Status: category
-  - Product_Category_1: category
-  - Product_Category_2: category
-  - Product_Category_3: category
+  - Marital_Status: int
+  - Product_Category_1: int
+  - Product_Category_2: float
+  - Product_Category_3: float
   - Purchase: int
 
 numerical_columns:
+  - User_ID
+  - Occupation
+  - Marital_Status
+  - Product_Category_1
+  - Product_Category_2
+  - Product_Category_3
   - Purchase
 
 categorical_columns:
@@ -21,35 +26,27 @@ categorical_columns:
   - Product_ID
   - Gender
   - Age
-  - Occupation
   - City_Category
   - Stay_In_Current_City_Years
-  - region_of_employment
-  - Marital_Status
-  - Product_Category_1
-  - Product_Category_2
-  - Product_Category_3
+
 
 drop_columns:
   - User_ID
-  - Product_Category_3
+  - Product_ID
 
 # for data transformation
 or_columns:
   - Age
-  - Stay_In_Current_City_Years
 
 oh_columns:
-  - Product_ID
-  - Gender
-  - Occupation
   - City_Category
-  - Product_Category_1
-  - Product_Category_2
 
+lab_columns:
+  - Gender
 
 transform_columns:
-  - no_of_employees
-  - company_age
+  - Product_Category_2
+  - Product_Category_3
 
-
+datatype_change_column:
+  - Stay_In_Current_City_Years
