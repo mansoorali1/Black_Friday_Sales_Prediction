@@ -44,7 +44,7 @@ oh_columns:
 lab_columns:
   - Gender
 
-transform_columns:
+impute_columns:
   - Product_Category_2
   - Product_Category_3
 

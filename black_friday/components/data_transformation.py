@@ -4,10 +4,12 @@ import numpy as np
 import pandas as pd
 from imblearn.combine import SMOTEENN
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler, OneHotEncoder, OrdinalEncoder, PowerTransformer
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder, OrdinalEncoder
 from sklearn.compose import ColumnTransformer
+from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.impute import SimpleImputer
 
-from black_friday.constants import TARGET_COLUMN, SCHEMA_FILE_PATH, CURRENT_YEAR
+from black_friday.constants import TARGET_COLUMN, SCHEMA_FILE_PATH
 from black_friday.entity.config_entity import DataTransformationConfig
 from black_friday.entity.artifact_entity import DataTransformationArtifact, DataIngestionArtifact, DataValidationArtifact
 from black_friday.exception import BlackFridayException
@@ -54,31 +56,36 @@ class DataTransformation:
         try:
             logging.info("Got numerical cols from schema config")
 
-            numeric_transformer = StandardScaler()
-            oh_transformer = OneHotEncoder()
-            ordinal_encoder = OrdinalEncoder()
+            class LabelEncoderTransformer(BaseEstimator, TransformerMixin):
+                def __init__(self):
+                    self.label_encoder = LabelEncoder()
+
+                def fit(self, X, y=None):
+                    self.label_encoder.fit(X.squeeze())
+                    return self
+
+                def transform(self, X):
+                    return self.label_encoder.transform(X.squeeze()).reshape(-1, 1)
+            age_list = ['0-17', '18-25', '26-35', '36-45', '46-50', '51-55', '55+']    
+            oh_encoder = OneHotEncoder(drop='first')
+            ordinal_encoder = OrdinalEncoder(categories=[age_list])
+            most_frequent_imputer = SimpleImputer(strategy='most_frequent')
 
             logging.info("Initialized StandardScaler, OneHotEncoder, OrdinalEncoder")
 
+            lab_columns= self._schema_config['lab_columns']
             oh_columns = self._schema_config['oh_columns']
             or_columns = self._schema_config['or_columns']
-            transform_columns = self._schema_config['transform_columns']
-            num_features = self._schema_config['num_features']
-
-            logging.info("Initialize PowerTransformer")
-
-            transform_pipe = Pipeline(steps=[
-                ('transformer', PowerTransformer(method='yeo-johnson'))
-            ])
+            impute_columns = self._schema_config['impute_columns']
+            
             preprocessor = ColumnTransformer(
                 [
-                    ("OneHotEncoder", oh_transformer, oh_columns),
-                    ("Ordinal_Encoder", ordinal_encoder, or_columns),
-                    ("Transformer", transform_pipe, transform_columns),
-                    ("StandardScaler", numeric_transformer, num_features)
+                    ("Label", LabelEncoderTransformer(), lab_columns),
+                    ("Onehot", oh_encoder, oh_columns),
+                    ("Ordinal", ordinal_encoder, or_columns),
+                    ("Imputer", most_frequent_imputer, impute_columns)
                 ]
             )
-
             logging.info("Created preprocessor object from ColumnTransformer")
 
             logging.info(
@@ -88,6 +95,7 @@ class DataTransformation:
 
         except Exception as e:
             raise BlackFridayException(e, sys) from e
+
 
     def initiate_data_transformation(self, ) -> DataTransformationArtifact:
         """
@@ -111,9 +119,11 @@ class DataTransformation:
 
                 logging.info("Got train features and test features of Training dataset")
 
-                input_feature_train_df['company_age'] = CURRENT_YEAR-input_feature_train_df['yr_of_estab']
+                input_feature_train_df['Stay_In_Current_City_Years'] = input_feature_train_df['Stay_In_Current_City_Years'].str.replace("+", "", regex=False)
 
-                logging.info("Added company_age column to the Training dataset")
+                input_feature_train_df['Stay_In_Current_City_Years'] = input_feature_train_df['Stay_In_Current_City_Years'].astype(int)
+
+                logging.info("Transformed ans changed data type of stay column to the Training dataset")
 
                 drop_cols = self._schema_config['drop_columns']
 
@@ -121,27 +131,28 @@ class DataTransformation:
 
                 input_feature_train_df = drop_columns(df=input_feature_train_df, cols = drop_cols)
                 
-                target_feature_train_df = target_feature_train_df.replace(
-                    TargetValueMapping()._asdict()
-                )
+                # target_feature_train_df = target_feature_train_df.replace(
+                #     TargetValueMapping()._asdict()
+                # )
 
 
                 input_feature_test_df = test_df.drop(columns=[TARGET_COLUMN], axis=1)
 
                 target_feature_test_df = test_df[TARGET_COLUMN]
 
+                input_feature_test_df['Stay_In_Current_City_Years'] = input_feature_test_df['Stay_In_Current_City_Years'].str.replace("+", "", regex=False)
 
-                input_feature_test_df['company_age'] = CURRENT_YEAR-input_feature_test_df['yr_of_estab']
+                input_feature_test_df['Stay_In_Current_City_Years'] = input_feature_test_df['Stay_In_Current_City_Years'].astype(int)
 
-                logging.info("Added company_age column to the Test dataset")
+                logging.info("Transformed ans changed data type of stay column to the Training dataset")
 
                 input_feature_test_df = drop_columns(df=input_feature_test_df, cols = drop_cols)
 
                 logging.info("drop the columns in drop_cols of Test dataset")
 
-                target_feature_test_df = target_feature_test_df.replace(
-                TargetValueMapping()._asdict()
-                )
+                # target_feature_test_df = target_feature_test_df.replace(
+                # TargetValueMapping()._asdict()
+                # )
 
                 logging.info("Got train features and test features of Testing dataset")
 
@@ -159,32 +170,32 @@ class DataTransformation:
 
                 logging.info("Used the preprocessor object to transform the test features")
 
-                logging.info("Applying SMOTEENN on Training dataset")
+                # logging.info("Applying SMOTEENN on Training dataset")
 
-                smt = SMOTEENN(sampling_strategy="minority")
+                # smt = SMOTEENN(sampling_strategy="minority")
 
-                input_feature_train_final, target_feature_train_final = smt.fit_resample(
-                    input_feature_train_arr, target_feature_train_df
-                )
+                # input_feature_train_final, target_feature_train_final = smt.fit_resample(
+                #     input_feature_train_arr, target_feature_train_df
+                # )
 
-                logging.info("Applied SMOTEENN on training dataset")
+                # logging.info("Applied SMOTEENN on training dataset")
 
-                logging.info("Applying SMOTEENN on testing dataset")
+                # logging.info("Applying SMOTEENN on testing dataset")
 
-                input_feature_test_final, target_feature_test_final = smt.fit_resample(
-                    input_feature_test_arr, target_feature_test_df
-                )
+                # input_feature_test_final, target_feature_test_final = smt.fit_resample(
+                #     input_feature_test_arr, target_feature_test_df
+                # )
 
-                logging.info("Applied SMOTEENN on testing dataset")
+                # logging.info("Applied SMOTEENN on testing dataset")
 
                 logging.info("Created train array and test array")
 
                 train_arr = np.c_[
-                    input_feature_train_final, np.array(target_feature_train_final)
+                    input_feature_train_arr, np.array(target_feature_train_df)
                 ]
 
                 test_arr = np.c_[
-                    input_feature_test_final, np.array(target_feature_test_final)
+                    input_feature_test_arr, np.array(target_feature_test_df)
                 ]
 
                 save_object(self.data_transformation_config.transformed_object_file_path, preprocessor)
