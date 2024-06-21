@@ -3,126 +3,113 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>US Visa Approval Form</title>
+    <title>Black Friday Sales Prediction</title>
     <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <style>
-        h1 {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: bold;
-        }
-        .container {
-            margin-top: 15px; /* Adjust as needed */
-        }
-    </style>
   </head>
   <body>
     <section>
         <div class="container-fluid">
-            <div class="container">
+            <div class="container formBox">
                 <form action="/" method="post">
-                    <h1>US Visa Approval Form</h1> <!-- Centered, increased font size, and bold -->
+                    <h1>Black Friday Sales Prediction</h1> <!-- Centered, increased font size, and bold -->
+
                     <div class="mb-3">
-                        <label for="continent" >Continent</label>
-                        <select class="form-control" id="continent" name="continent" placeholder="Continent" required="required">
-                          <option value="" disabled selected>Select Continent</option>
-                          <option>Asia</option>
-                          <option>Africa</option>
-                          <option>North America</option>
-                          <option>Europe</option>
-                          <option>South America</option>
-                          <option>Oceania</option>
+                        <label for="gender">Gender</label>
+                        <select class="form-control" id="gender" name="gender" placeholder="Gender" required="required">
+                            <option value="" disabled selected>Select Gender</option>
+                            <option>M</option>
+                            <option>F</option>
                         </select>
-                      </div>
-        
-                      <!-- Removed the label "US Visa approval Form" above the Continent box -->
-        
-                      <div class="mb-3">
-                        <label for="education_of_employee">Education of Employee</label>
-                        <select class="form-control" id="education_of_employee" name="education_of_employee" placeholder="Education" required="required">
-                            <option value="" disabled selected>Select Education</option>
-                            <option>High School</option>
-                            <option>Master's</option>
-                            <option>Bachelor's</option>
-                            <option>Doctorate</option>
-                        </select>
-                      </div>
-        
-                      <div class="mb-3">
-                        <label for="has_job_experience">Has Job Experience</label>
-                        <select class="form-control" id="has_job_experience" name="has_job_experience" placeholder="Has Experience" required="required">
-                            <option value="" disabled selected>Has Experience</option>
-                            <option>N</option>
-                            <option>Y</option>
-                        </select>
-                      </div>
-        
-                      <div class="mb-3">
-                        <label for="requires_job_training">Requires Job Training</label>
-                        <select class="form-control" id="requires_job_training" name="requires_job_training" placeholder="Training required" required="required">
-                            <option value="" disabled selected>Required Training</option>
-                            <option>N</option>
-                            <option>Y</option>
-                        </select>
-                      </div>
-        
-                      <div class="mb-3">
-                        <label for="no_of_employees">Number of Employees</label>
-                        <input type="number" class="form-control" id="no_of_employees" name="no_of_employees" min="14500" max="40000" placeholder="Select between 15000 to 40000" required="required">
-                      </div>
-                      
-                      <div class="mb-3">
-                        <label for="region_of_employment">Select Region</label>
-                        <select class="form-control" id="region_of_employment" name="region_of_employment" placeholder="Region" required="required">
-                          <option value="" disabled selected>Region</option>
-                          <option>West</option>
-                          <option>Northeast</option>
-                          <option>South</option>
-                          <option>Midwest</option>
-                          <option>Island</option>
-                        </select>
-                      </div>
-        
-                      <div class="mb-3">
-                        <label for="prevailing_wage">Prevailing Wage</label>
-                        <input type="number" class="form-control" id="prevailing_wage" name="prevailing_wage" min="600" max="70000" placeholder="Select between 700 to 7000" required="required">
-                      </div>
-
-
-        
-                      <div class="mb-3">
-                        <label for="unit_of_wage">Contract Tenure</label>
-                        <select class="form-control" id="unit_of_wage" name="unit_of_wage" placeholder="Contract tenure" required="required">
-                            <option value="" disabled selected>Contract Tenure</option>
-                            <option>Hour</option>
-                            <option>Year</option>
-                            <option>Week</option>
-                            <option>Month</option>
-                        </select>
-                      </div>
-        
-                      <div class="mb-3">
-                        <label for="full_time_position">Full or Part Time</label>
-                        <select class="form-control" id="full_time_position" name="full_time_position" placeholder="Full Time" required="required">
-                            <option value="" disabled selected>Full Time</option>
-                            <option>Y</option>
-                            <option>N</option>
-                        </select>
-                      </div>
-        
-                      <div class="mb-3">
-                        <label for="company_age">Age of the Company</label>
-                        <input type="number" class="form-control" id="company_age" name="company_age" min="15" max="180" placeholder="Select between 10 to 180" required="required">
-                      </div>
-        
-                        <input class="btn btn-primary" type="submit" value="Predict Visa-Status" required />
                     </div>
-                    
+
+                    <div class="mb-3">
+                        <label for="age">Age</label>
+                        <select class="form-control" id="age" name="age" placeholder="Age" required="required">
+                            <option value="" disabled selected>Select Age</option>
+                            <option>0-17</option>
+                            <option>18-25</option>
+                            <option>26-35</option>
+                            <option>36-45</option>
+                            <option>46-50</option>
+                            <option>51-55</option>
+                            <option>55+</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="occupation">Occupation</label>
+                        <input type="number" class="form-control" id="occupation" name="occupation" min="0" max="20" placeholder="Select between 0 to 20" required="required">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="city_category">City Category</label>
+                        <select class="form-control" id="city_category" name="city_category" placeholder="City Category" required="required">
+                            <option value="" disabled selected>Select City Category</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="stay_in_current_city_years">Stay In Current City Years</label>
+                        <select class="form-control" id="stay_in_current_city_years" name="stay_in_current_city_years" placeholder="Stay In Current City Years" required="required">
+                            <option value="" disabled selected>Select Years</option>
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4+</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="marital_status">Marital Status</label>
+                        <select class="form-control" id="marital_status" name="marital_status" placeholder="Marital Status" required="required">
+                            <option value="" disabled selected>Select Marital Status</option>
+                            <option>0</option>
+                            <option>1</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="product_category_1">Product Category 1</label>
+                        <input type="number" class="form-control" id="product_category_1" name="product_category_1" min="1" max="20" placeholder="Select between 1 to 20" required="required">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="product_category_2">Product Category 2</label>
+                        <input type="number" class="form-control" id="product_category_2" name="product_category_2" min="2" max="18" placeholder="Select between 2 to 18" required="required">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="product_category_3">Product Category 3</label>
+                        <select class="form-control" id="product_category_3" name="product_category_3" placeholder="Product Category 3" required="required">
+                            <option value="" disabled selected>Select Product Category 3</option>
+                            <option>3.0</option>
+                            <option>4.0</option>
+                            <option>5.0</option>
+                            <option>6.0</option>
+                            <option>8.0</option>
+                            <option>9.0</option>
+                            <option>10.0</option>
+                            <option>11.0</option>
+                            <option>12.0</option>
+                            <option>13.0</option>
+                            <option>14.0</option>
+                            <option>15.0</option>
+                            <option>16.0</option>
+                            <option>17.0</option>
+                            <option>18.0</option>
+                        </select>
+                    </div>
+
+                    <input class="btn btn-primary button" type="submit" value="Predict Sales" required />
                 </form>
             </div>
             <div class="text-center text-black">
-                <h2 class="display-4 fw-bolder">Visa Prediction Status: {{context}} </h2>
+                <h2 class="display-4 fw-bolder">Predicted Sales: {{context}} </h2>
             </div>
         </div>
     </section>
@@ -137,3 +124,4 @@
         })
     </script>
   </body>
+</html>

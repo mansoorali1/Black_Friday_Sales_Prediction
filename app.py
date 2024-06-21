@@ -32,36 +32,36 @@ app.add_middleware(
 class DataForm:
     def __init__(self, request: Request):
         self.request: Request = request
-        self.continent: Optional[str] = None
-        self.education_of_employee: Optional[str] = None
-        self.has_job_experience: Optional[str] = None
-        self.requires_job_training: Optional[str] = None
-        self.no_of_employees: Optional[str] = None
-        self.company_age: Optional[str] = None
-        self.region_of_employment: Optional[str] = None
-        self.prevailing_wage: Optional[str] = None
-        self.unit_of_wage: Optional[str] = None
-        self.full_time_position: Optional[str] = None
+        self.gender: Optional[str] = None
+        self.age: Optional[str] = None
+        self.occupation: Optional[str] = None
+        self.city_category: Optional[str] = None
+        self.stay_in_current_city_years: Optional[str] = None
+        self.marital_status: Optional[str] = None
+        self.product_category_1: Optional[str] = None
+        self.product_category_2: Optional[str] = None
+        self.product_category_3: Optional[str] = None
         
 
-    async def get_usvisa_data(self):
+    async def get_blackfriday_data(self):
         form = await self.request.form()
-        self.continent = form.get("continent")
-        self.education_of_employee = form.get("education_of_employee")
-        self.has_job_experience = form.get("has_job_experience")
-        self.requires_job_training = form.get("requires_job_training")
-        self.no_of_employees = form.get("no_of_employees")
-        self.company_age = form.get("company_age")
-        self.region_of_employment = form.get("region_of_employment")
-        self.prevailing_wage = form.get("prevailing_wage")
-        self.unit_of_wage = form.get("unit_of_wage")
-        self.full_time_position = form.get("full_time_position")
+
+        self.gender = form.get("gender")
+        self.age = form.get("age")
+        self.occupation = form.get("occupation")
+        self.city_category = form.get("city_category")
+        self.stay_in_current_city_years = form.get("stay_in_current_city_years")
+        self.marital_status = form.get("marital_status")
+        self.product_category_1 = form.get("product_category_1")
+        self.product_category_2 = form.get("product_category_2")
+        self.product_category_3 = form.get("product_category_3")
+
 
 @app.get("/", tags=["authentication"])
 async def index(request: Request):
 
     return templates.TemplateResponse(
-            "usvisa.html",{"request": request, "context": "Rendering"})
+            "blackfriday.html",{"request": request, "context": "Rendering"})
 
 
 @app.get("/train")
@@ -81,36 +81,38 @@ async def trainRouteClient():
 async def predictRouteClient(request: Request):
     try:
         form = DataForm(request)
-        await form.get_usvisa_data()
+        await form.get_blackfriday_data()
         
-        usvisa_data = BlackFridayData(
-                                continent= form.continent,
-                                education_of_employee = form.education_of_employee,
-                                has_job_experience = form.has_job_experience,
-                                requires_job_training = form.requires_job_training,
-                                no_of_employees= form.no_of_employees,
-                                company_age= form.company_age,
-                                region_of_employment = form.region_of_employment,
-                                prevailing_wage= form.prevailing_wage,
-                                unit_of_wage= form.unit_of_wage,
-                                full_time_position= form.full_time_position,
+        blackfriday_data = BlackFridayData(
+                                gender = form.gender,
+                                age = form.age,
+                                occupation = form.occupation,
+                                city_category = form.city_category,
+                                stay_in_current_city_years = form.stay_in_current_city_years,
+                                marital_status = form.marital_status,
+                                product_category_1 = form.product_category_1,
+                                product_category_2 = form.product_category_2,
+                                product_category_3 = form.product_category_3,
+
                                 )
         
-        usvisa_df = usvisa_data.get_usvisa_input_data_frame()
+
+
+        blackfriday_df = blackfriday_data.get_blackfriday_input_data_frame()
 
         model_predictor = BlackFridayPredictor()
 
-        value = model_predictor.predict(dataframe=usvisa_df)[0]
+        value = model_predictor.predict(dataframe=blackfriday_df)[0]
 
-        status = None
-        if value == 1:
-            status = "Visa-approved"
-        else:
-            status = "Visa Not-Approved"
+        # status = None
+        # if value == 1:
+        #     status = "Visa-approved"
+        # else:
+        #     status = "Visa Not-Approved"
 
         return templates.TemplateResponse(
-            "usvisa.html",
-            {"request": request, "context": status},
+            "blackfriday.html",
+            {"request": request, "context": value},
         )
         
     except Exception as e:

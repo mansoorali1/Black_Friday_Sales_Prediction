@@ -13,73 +13,72 @@ from pandas import DataFrame
 
 class BlackFridayData:
     def __init__(self,
-                continent,
-                education_of_employee,
-                has_job_experience,
-                requires_job_training,
-                no_of_employees,
-                region_of_employment,
-                prevailing_wage,
-                unit_of_wage,
-                full_time_position,
-                company_age
+                gender,
+                age,
+                occupation,
+                city_category,
+                stay_in_current_city_years,
+                marital_status,
+                product_category_1,
+                product_category_2,
+                product_category_3
                 ):
         """
-        Usvisa Data constructor
+        BlackFriday Data constructor
         Input: all features of the trained model for prediction
         """
         try:
-            self.continent = continent
-            self.education_of_employee = education_of_employee
-            self.has_job_experience = has_job_experience
-            self.requires_job_training = requires_job_training
-            self.no_of_employees = no_of_employees
-            self.region_of_employment = region_of_employment
-            self.prevailing_wage = prevailing_wage
-            self.unit_of_wage = unit_of_wage
-            self.full_time_position = full_time_position
-            self.company_age = company_age
-
-
+            self.gender = gender
+            self.age = age
+            self.occupation = occupation
+            self.city_category = city_category
+            self.stay_in_current_city_years = stay_in_current_city_years
+            self.marital_status = marital_status
+            self.product_category_1 = product_category_1
+            self.product_category_2 = product_category_2
+            self.product_category_3 = product_category_3
+              
         except Exception as e:
             raise BlackFridayException(e, sys) from e
 
-    def get_usvisa_input_data_frame(self)-> DataFrame:
+    def get_blackfriday_input_data_frame(self)-> DataFrame:
         """
-        This function returns a DataFrame from USvisaData class input
+        This function returns a DataFrame from BlackFriday class input
         """
         try:
             
-            usvisa_input_dict = self.get_usvisa_data_as_dict()
-            return DataFrame(usvisa_input_dict)
+            blackfriday_input_dict = self.get_blackfriday_data_as_dict()
+            return DataFrame(blackfriday_input_dict)
         
         except Exception as e:
             raise BlackFridayException(e, sys) from e
 
 
-    def get_usvisa_data_as_dict(self):
+    def get_blackfriday_data_as_dict(self):
         """
-        This function returns a dictionary from USvisaData class input 
+        This function returns a dictionary from BlackFriday class input 
         """
-        logging.info("Entered get_usvisa_data_as_dict method as USvisaData class")
+        logging.info("Entered get_blackfriday_data_as_dict method as BlackFriday class")
 
         try:
             input_data = {
-                "continent": [self.continent],
-                "education_of_employee": [self.education_of_employee],
-                "has_job_experience": [self.has_job_experience],
-                "requires_job_training": [self.requires_job_training],
-                "no_of_employees": [self.no_of_employees],
-                "region_of_employment": [self.region_of_employment],
-                "prevailing_wage": [self.prevailing_wage],
-                "unit_of_wage": [self.unit_of_wage],
-                "full_time_position": [self.full_time_position],
-                "company_age": [self.company_age],
+                "gender" : [self.gender],
+                "age" : [self.age],
+                "occupation" : [self.occupation], 
+                "city_category" : [self.city_category],
+                "stay_in_current_city_years" : [self.stay_in_current_city_years], 
+                "marital_status" : [self.marital_status], 
+                "product_category_1" : [self.product_category_1], 
+                "product_category_2" : [self.product_category_2], 
+                "product_category_3" : [self.product_category_3], 
+
             }
 
-            logging.info("Created usvisa data dict")
 
-            logging.info("Exited get_usvisa_data_as_dict method as USvisaData class")
+
+            logging.info("Created blackfriday data dict")
+
+            logging.info("Exited get_blackfriday_data_as_dict method as BlackFridayData class")
 
             return input_data
 
@@ -99,11 +98,11 @@ class BlackFridayPredictor:
 
     def predict(self, dataframe) -> str:
         """
-        This is the method of USvisaClassifier
+        This is the method of BlackFridayPredictor
         Returns: Prediction in string format
         """
         try:
-            logging.info("Entered predict method of USvisaClassifier class")
+            logging.info("Entered predict method of BlackFridayPredictor class")
             model = BlackFridayEstimator(
                 bucket_name=self.prediction_pipeline_config.model_bucket_name,
                 model_path=self.prediction_pipeline_config.model_file_path,

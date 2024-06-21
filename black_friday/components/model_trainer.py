@@ -5,14 +5,14 @@ import numpy as np
 import pandas as pd
 from pandas import DataFrame
 from sklearn.pipeline import Pipeline
-from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
+from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_percentage_error
 from neuro_mf  import ModelFactory
 
 from black_friday.exception import BlackFridayException
 from black_friday.logger import logging
 from black_friday.utils.main_utils import load_numpy_array_data, read_yaml_file, load_object, save_object
 from black_friday.entity.config_entity import ModelTrainerConfig
-from black_friday.entity.artifact_entity import DataTransformationArtifact, ModelTrainerArtifact, ClassificationMetricArtifact
+from black_friday.entity.artifact_entity import DataTransformationArtifact, ModelTrainerArtifact, RegressionMetricArtifact
 from black_friday.entity.estimator import BlackFridayModel
 
 class ModelTrainer:
@@ -40,17 +40,22 @@ class ModelTrainer:
             x_train, y_train, x_test, y_test = train[:, :-1], train[:, -1], test[:, :-1], test[:, -1]
 
             best_model_detail = model_factory.get_best_model(
-                X=x_train,y=y_train,base_accuracy=self.model_trainer_config.expected_accuracy
+                X=x_train,y=y_train,base_accuracy=self.model_trainer_config.expected_score
             )
             model_obj = best_model_detail.best_model
 
             y_pred = model_obj.predict(x_test)
             
-            accuracy = accuracy_score(y_test, y_pred) 
-            f1 = f1_score(y_test, y_pred)  
-            precision = precision_score(y_test, y_pred)  
-            recall = recall_score(y_test, y_pred)
-            metric_artifact = ClassificationMetricArtifact(f1_score=f1, precision_score=precision, recall_score=recall)
+            # accuracy = accuracy_score(y_test, y_pred) 
+            r2 = r2_score(y_test, y_pred)
+            rmse = mean_squared_error(y_test, y_pred, squared=False)
+            mape=mean_absolute_percentage_error(y_test,y_pred)
+
+            # f1 = f1_score(y_test, y_pred)  
+            # precision = precision_score(y_test, y_pred)  
+            # recall = recall_score(y_test, y_pred)
+            
+            metric_artifact = RegressionMetricArtifact(r2score=r2, rmse_score=rmse, mape_score=mape)
             
             return best_model_detail, metric_artifact
         
@@ -76,7 +81,7 @@ class ModelTrainer:
             preprocessing_obj = load_object(file_path=self.data_transformation_artifact.transformed_object_file_path)
 
 
-            if best_model_detail.best_score < self.model_trainer_config.expected_accuracy:
+            if best_model_detail.best_score < self.model_trainer_config.expected_score:
                 logging.info("No best model found with score more than base score")
                 raise Exception("No best model found with score more than base score")
 

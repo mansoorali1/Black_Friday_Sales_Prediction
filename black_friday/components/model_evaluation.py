@@ -1,8 +1,8 @@
 from black_friday.entity.config_entity import ModelEvaluationConfig
 from black_friday.entity.artifact_entity import ModelTrainerArtifact, DataIngestionArtifact, ModelEvaluationArtifact
-from sklearn.metrics import f1_score
+from sklearn.metrics import r2_score
 from black_friday.exception import BlackFridayException
-from black_friday.constants import TARGET_COLUMN, CURRENT_YEAR
+from black_friday.constants import TARGET_COLUMN
 from black_friday.logger import logging
 import sys
 import pandas as pd
@@ -10,12 +10,12 @@ from typing import Optional
 from black_friday.entity.s3_estimator import BlackFridayEstimator
 from dataclasses import dataclass
 from black_friday.entity.estimator import BlackFridayModel
-from black_friday.entity.estimator import TargetValueMapping
+# from black_friday.entity.estimator import TargetValueMapping
 
 @dataclass
 class EvaluateModelResponse:
-    trained_model_f1_score: float
-    best_model_f1_score: float
+    trained_model_r2_score: float
+    best_model_r2_score: float
     is_model_accepted: bool
     difference: float
 
@@ -62,27 +62,27 @@ class ModelEvaluation:
         """
         try:
             test_df = pd.read_csv(self.data_ingestion_artifact.test_file_path)
-            test_df['company_age'] = CURRENT_YEAR-test_df['yr_of_estab']
+            # test_df['company_age'] = CURRENT_YEAR-test_df['yr_of_estab']
 
             x, y = test_df.drop(TARGET_COLUMN, axis=1), test_df[TARGET_COLUMN]
-            y = y.replace(
-                TargetValueMapping()._asdict()
-            )
+            # y = y.replace(
+            #     TargetValueMapping()._asdict()
+            # )
 
             # trained_model = load_object(file_path=self.model_trainer_artifact.trained_model_file_path)
-            trained_model_f1_score = self.model_trainer_artifact.metric_artifact.f1_score
+            trained_model_r2_score = self.model_trainer_artifact.metric_artifact.r2_score
 
-            best_model_f1_score=None
+            best_model_r2_score=None
             best_model = self.get_best_model()
             if best_model is not None:
                 y_hat_best_model = best_model.predict(x)
-                best_model_f1_score = f1_score(y, y_hat_best_model)
+                best_model_r2_score = r2_score(y, y_hat_best_model)
             
-            tmp_best_model_score = 0 if best_model_f1_score is None else best_model_f1_score
-            result = EvaluateModelResponse(trained_model_f1_score=trained_model_f1_score,
-                                           best_model_f1_score=best_model_f1_score,
-                                           is_model_accepted=trained_model_f1_score > tmp_best_model_score,
-                                           difference=trained_model_f1_score - tmp_best_model_score
+            tmp_best_model_score = 0 if best_model_r2_score is None else best_model_r2_score
+            result = EvaluateModelResponse(trained_model_r2_score=trained_model_r2_score,
+                                           best_model_r2_score=best_model_r2_score,
+                                           is_model_accepted=trained_model_r2_score > tmp_best_model_score,
+                                           difference=trained_model_r2_score - tmp_best_model_score
                                            )
             logging.info(f"Result: {result}")
             return result

@@ -11,11 +11,15 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
+    background-color: #f8f9fa; /* Light grey background */
 }
 
 .formBox {
     margin-top: 50px;
     padding: 50px;
+    background-color: #ffffff; /* White background for the form */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 h1 {
@@ -25,6 +29,7 @@ h1 {
     margin-bottom: 50px !important;
     text-transform: uppercase;
     font-size: 48px;
+    color: #343a40; /* Dark grey color */
 }
 
 .inputBox {
@@ -42,6 +47,11 @@ h1 {
     outline: none;
     height: 50px;
     font-size: 24px;
+    transition: background 0.3s ease;
+}
+
+.button:hover {
+    background: #0097a7; /* Darker shade of button color */
 }
 
 .input {
@@ -53,6 +63,11 @@ h1 {
     outline: none;
     font-size: 24px;
     border-bottom: 2px solid rgba(0, 0, 0, .5);
+    transition: border-color 0.3s ease;
+}
+
+.input:focus {
+    border-color: #00bcd4; /* Border color on focus */
 }
 
 .inputText {
@@ -79,4 +94,12 @@ h1 {
     outline: none;
     height: 50px;
     font-size: 24px;
+}
+
+.text-center {
+    margin-top: 30px;
+}
+
+h2 {
+    color: #343a40; /* Dark grey color */
 }
