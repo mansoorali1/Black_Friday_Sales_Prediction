@@ -4,18 +4,24 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Black Friday Sales Prediction</title>
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/style.css">
   </head>
   <body>
     <section>
         <div class="container-fluid">
+            <!-- <div class="text-left text-white">
+                <h1 class="display-4 fw-bolder">Black Friday Sales Prediction </h1>
+            </div> -->
             <div class="container formBox">
                 <form action="/" method="post">
-                    <h1>Black Friday Sales Prediction</h1> <!-- Centered, increased font size, and bold -->
+                    <h1>Black Friday Sales Prediction</h1> 
+                    <!-- Centered, increased font size, and bold -->
 
                     <div class="mb-3">
-                        <label for="gender">Gender</label>
+                        <div class="text-left text-white">
+                            <label for="gender">Gender</label>
+                        </div>
                         <select class="form-control" id="gender" name="gender" placeholder="Gender" required="required">
                             <option value="" disabled selected>Select Gender</option>
                             <option>M</option>
@@ -24,7 +30,9 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="age">Age</label>
+                        <div class="text-left text-white">
+                            <label for="age">Age</label>
+                        </div>   
                         <select class="form-control" id="age" name="age" placeholder="Age" required="required">
                             <option value="" disabled selected>Select Age</option>
                             <option>0-17</option>
@@ -38,12 +46,16 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="occupation">Occupation</label>
+                        <div class="text-left text-white">
+                            <label for="occupation">Occupation</label>
+                        </div>
                         <input type="number" class="form-control" id="occupation" name="occupation" min="0" max="20" placeholder="Select between 0 to 20" required="required">
                     </div>
 
                     <div class="mb-3">
-                        <label for="city_category">City Category</label>
+                        <div class="text-left text-white">
+                            <label for="city_category">City Category</label>
+                        </div>
                         <select class="form-control" id="city_category" name="city_category" placeholder="City Category" required="required">
                             <option value="" disabled selected>Select City Category</option>
                             <option>A</option>
@@ -53,7 +65,9 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="stay_in_current_city_years">Stay In Current City Years</label>
+                        <div class="text-left text-white">
+                            <label for="stay_in_current_city_years">Stay In Current City Years</label>
+                        </div>
                         <select class="form-control" id="stay_in_current_city_years" name="stay_in_current_city_years" placeholder="Stay In Current City Years" required="required">
                             <option value="" disabled selected>Select Years</option>
                             <option>0</option>
@@ -65,7 +79,9 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="marital_status">Marital Status</label>
+                        <div class="text-left text-white">
+                            <label for="marital_status">Marital Status</label>
+                        </div>
                         <select class="form-control" id="marital_status" name="marital_status" placeholder="Marital Status" required="required">
                             <option value="" disabled selected>Select Marital Status</option>
                             <option>0</option>
@@ -74,17 +90,23 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="product_category_1">Product Category 1</label>
+                        <div class="text-left text-white">
+                            <label for="product_category_1">Product Category 1</label>
+                        </div>
                         <input type="number" class="form-control" id="product_category_1" name="product_category_1" min="1" max="20" placeholder="Select between 1 to 20" required="required">
                     </div>
 
                     <div class="mb-3">
-                        <label for="product_category_2">Product Category 2</label>
+                        <div class="text-left text-white">
+                            <label for="product_category_2">Product Category 2</label>
+                        </div>
                         <input type="number" class="form-control" id="product_category_2" name="product_category_2" min="2" max="18" placeholder="Select between 2 to 18" required="required">
                     </div>
 
                     <div class="mb-3">
-                        <label for="product_category_3">Product Category 3</label>
+                        <div class="text-left text-white">
+                            <label for="product_category_3">Product Category 3</label>
+                        </div>
                         <select class="form-control" id="product_category_3" name="product_category_3" placeholder="Product Category 3" required="required">
                             <option value="" disabled selected>Select Product Category 3</option>
                             <option>3.0</option>
@@ -108,7 +130,7 @@
                     <input class="btn btn-primary button" type="submit" value="Predict Sales" required />
                 </form>
             </div>
-            <div class="text-center text-black">
+            <div class="text-center text-white">
                 <h2 class="display-4 fw-bolder">Predicted Sales: {{context}} </h2>
             </div>
         </div>

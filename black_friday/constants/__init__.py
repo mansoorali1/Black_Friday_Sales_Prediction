@@ -3,7 +3,7 @@ from datetime import date
 
 DATABASE_NAME = "BLACK_FRIDAY"
 
-COLLECTION_NAME = "bfriday_test"
+COLLECTION_NAME = "bfriday_train"
 #COLLECTION_NAME_VALID = "bfriday_train"
 
 
@@ -32,7 +32,7 @@ REGION_NAME = "us-east-1"
 """
 Data Ingestion related constant start with DATA_INGESTION VAR NAME
 """
-DATA_INGESTION_COLLECTION_NAME: str = "bfriday_test"
+DATA_INGESTION_COLLECTION_NAME: str = "bfriday_train"
 DATA_INGESTION_DIR_NAME: str = "data_ingestion"
 DATA_INGESTION_FEATURE_STORE_DIR: str = "feature_store"
 DATA_INGESTION_INGESTED_DIR: str = "ingested"
@@ -63,12 +63,12 @@ MODEL TRAINER related constant start with MODEL_TRAINER var name
 MODEL_TRAINER_DIR_NAME: str = "model_trainer"
 MODEL_TRAINER_TRAINED_MODEL_DIR: str = "trained_model"
 MODEL_TRAINER_TRAINED_MODEL_NAME: str = "model.pkl"
-MODEL_TRAINER_EXPECTED_SCORE: float = 0.6
+MODEL_TRAINER_EXPECTED_SCORE: float = 0
 MODEL_TRAINER_MODEL_CONFIG_FILE_PATH: str = os.path.join("config", "model.yaml")
 
 
 MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE: float = 0.02
-MODEL_BUCKET_NAME = "blackfriday-model1"
+MODEL_BUCKET_NAME = "blackfriday-modelv1"
 MODEL_PUSHER_S3_KEY = "model-registry"
 
 

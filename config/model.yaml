@@ -26,7 +26,7 @@ model_selection:
       - 0.05
         
   module_1:
-    class: RandomForestClassifier
+    class: RandomForestRegressor
     module: sklearn.ensemble
     params:
       max_depth: 10

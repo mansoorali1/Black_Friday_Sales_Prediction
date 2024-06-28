@@ -1,5 +1,5 @@
 from black_friday.logger import logging
-from black_friday.exception import USvisaException
+from black_friday.exception import BlackFridayException
 import sys
 
 from black_friday.pipeline.training_pipeline import TrainPipeline

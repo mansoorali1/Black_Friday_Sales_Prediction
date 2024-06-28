@@ -70,7 +70,7 @@ class ModelEvaluation:
             # )
 
             # trained_model = load_object(file_path=self.model_trainer_artifact.trained_model_file_path)
-            trained_model_r2_score = self.model_trainer_artifact.metric_artifact.r2_score
+            trained_model_r2_score = self.model_trainer_artifact.metric_artifact.r2score
 
             best_model_r2_score=None
             best_model = self.get_best_model()
