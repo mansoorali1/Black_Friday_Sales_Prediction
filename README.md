@@ -16,5 +16,3 @@ This project provides an end-to-end MLOps solution for predicting Black Friday S
 
 ## Directory Structure
 
-
-
