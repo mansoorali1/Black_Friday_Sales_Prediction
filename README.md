@@ -51,6 +51,108 @@ This project provides an end-to-end MLOps solution for predicting Black Friday S
   </a>
 </div>
 ## Directory Structure
+```
+C:.
+│   .dockerignore
+│   .gitignore
+│   app.py
+│   demo.py
+│   demo2.py
+│   Dockerfile
+│   LICENSE
+│   README.md
+│   requirements.txt
+│   setup.py
+│   template.py
+│
+├───.github
+│   └───workflows
+│           aws.yaml
+│
+│
+├───black_friday
+│   │   __init__.py
+│   │
+│   ├───cloud_storage
+│   │       aws_storage.py
+│   │       __init__.py
+│   │   
+│   │
+│   ├───components
+│   │       data_ingestion.py
+│   │       data_transformation.py
+│   │       data_validation.py
+│   │       model_evaluation.py
+│   │       model_pusher.py
+│   │       model_trainer.py
+│   │       __init__.py
+│   │   
+│   │
+│   ├───configuration
+│   │       aws_connection.py
+│   │       mongo_db_connection.py
+│   │       __init__.py
+│   │   
+│   │
+│   ├───constants
+│   │       __init__.py
+│   │   
+│   │
+│   ├───data_access
+│   │       blackfriday_data.py
+│   │       __init__.py
+│   │   
+│   │
+│   ├───entity
+│   │       artifact_entity.py
+│   │       config_entity.py
+│   │       estimator.py
+│   │       s3_estimator.py
+│   │       __init__.py
+│   │   
+│   │
+│   ├───exception
+│   │       __init__.py
+│   │   
+│   │
+│   ├───logger
+│   │       __init__.py
+│   │   
+│   │
+│   ├───pipeline
+│   │       prediction_pipeline.py
+│   │       training_pipeline.py
+│   │       __init__.py
+│   │   
+│   │
+│   ├───utils
+│           main_utils.py
+│           __init__.py
+│      
+│
+│
+├───config
+│       model.yaml
+│       schema.yaml
+│
+│
+├───notebook
+│       Feature_Engineering_and_Model_Training.ipynb
+│       mongoDB.ipynb
+│       Pipeline testing.ipynb
+│       Untitled.ipynb
+│
+├───static
+│   ├───css
+│   │       style.css
+│   │
+│   └───images
+│           bfriday_pic.jpg
+│
+├───templates
+        blackfriday.html
+
+```
 
 ## Data
 [Dataset](https://github.com/mansoorali1/Black_Friday_Sales_Prediction/blob/main/Data/train.csv)
