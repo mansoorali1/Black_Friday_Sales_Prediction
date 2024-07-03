@@ -156,7 +156,8 @@ C:.
 ## Data
 [Dataset](https://github.com/mansoorali1/Black_Friday_Sales_Prediction/blob/main/Data/train.csv)
 ## Output
-![Black Friday Sales_Prediction_App](https://github.com/mansoorali1/Black_Friday_Sales_Prediction/assets/73877240/925ed935-f713-4807-bc65-7d6df655c2e7)
+![Black Friday Sales_Prediction_App](https://github.com/mansoorali1/Black_Friday_Sales_Prediction/blob/main/Documents/project_screenshot.png)
 
 **[Youtube URL Deployment](https://youtu.be/y99Lpn8R-gA)**
+
 **[Youtube URL Demo]([https://youtu.be/y99Lpn8R-gA](https://youtu.be/PTTfqvoC80s))**
