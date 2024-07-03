@@ -6,6 +6,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.responses import HTMLResponse, RedirectResponse
 from uvicorn import run as app_run
+from black_friday.logger import logging
 
 from typing import Optional
 
@@ -99,7 +100,8 @@ async def predictRouteClient(request: Request):
 
 
         blackfriday_df = blackfriday_data.get_blackfriday_input_data_frame()
-
+        logging.info(f"Input DataFrame columns: {blackfriday_df.columns}")
+        
         model_predictor = BlackFridayPredictor()
 
         value = model_predictor.predict(dataframe=blackfriday_df)[0]

@@ -2,7 +2,7 @@ from black_friday.entity.config_entity import ModelEvaluationConfig
 from black_friday.entity.artifact_entity import ModelTrainerArtifact, DataIngestionArtifact, ModelEvaluationArtifact
 from sklearn.metrics import r2_score
 from black_friday.exception import BlackFridayException
-from black_friday.constants import TARGET_COLUMN
+from black_friday.constants import TARGET_COLUMN, SCHEMA_FILE_PATH
 from black_friday.logger import logging
 import sys
 import pandas as pd
@@ -11,6 +11,7 @@ from black_friday.entity.s3_estimator import BlackFridayEstimator
 from dataclasses import dataclass
 from black_friday.entity.estimator import BlackFridayModel
 # from black_friday.entity.estimator import TargetValueMapping
+from black_friday.utils.main_utils import save_object, save_numpy_array_data, read_yaml_file, drop_columns
 
 @dataclass
 class EvaluateModelResponse:
@@ -28,6 +29,7 @@ class ModelEvaluation:
             self.model_eval_config = model_eval_config
             self.data_ingestion_artifact = data_ingestion_artifact
             self.model_trainer_artifact = model_trainer_artifact
+            self._schema_config = read_yaml_file(file_path=SCHEMA_FILE_PATH)
         except Exception as e:
             raise BlackFridayException(e, sys) from e
 
@@ -42,11 +44,11 @@ class ModelEvaluation:
         try:
             bucket_name = self.model_eval_config.bucket_name
             model_path=self.model_eval_config.s3_model_key_path
-            usvisa_estimator = BlackFridayEstimator(bucket_name=bucket_name,
+            blackfriday_estimator = BlackFridayEstimator(bucket_name=bucket_name,
                                                model_path=model_path)
 
-            if usvisa_estimator.is_model_present(model_path=model_path):
-                return usvisa_estimator
+            if blackfriday_estimator.is_model_present(model_path=model_path):
+                return blackfriday_estimator
             return None
         except Exception as e:
             raise  BlackFridayException(e,sys)
@@ -62,8 +64,14 @@ class ModelEvaluation:
         """
         try:
             test_df = pd.read_csv(self.data_ingestion_artifact.test_file_path)
-            # test_df['company_age'] = CURRENT_YEAR-test_df['yr_of_estab']
 
+            drop_cols = self._schema_config['drop_columns']
+
+            logging.info("drop the columns in drop_cols of Testing dataset")
+
+            test_df = drop_columns(df=test_df, cols = drop_cols)
+            
+            # test_df['company_age'] = CURRENT_YEAR-test_df['yr_of_estab']
             x, y = test_df.drop(TARGET_COLUMN, axis=1), test_df[TARGET_COLUMN]
             # y = y.replace(
             #     TargetValueMapping()._asdict()

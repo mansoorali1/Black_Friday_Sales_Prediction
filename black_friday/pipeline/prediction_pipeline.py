@@ -48,7 +48,11 @@ class BlackFridayData:
         try:
             
             blackfriday_input_dict = self.get_blackfriday_data_as_dict()
-            return DataFrame(blackfriday_input_dict)
+            logging.info(f"black friday dict: {blackfriday_input_dict}")
+            df = DataFrame(blackfriday_input_dict)
+
+
+            return df
         
         except Exception as e:
             raise BlackFridayException(e, sys) from e
@@ -62,15 +66,15 @@ class BlackFridayData:
 
         try:
             input_data = {
-                "gender" : [self.gender],
-                "age" : [self.age],
-                "occupation" : [self.occupation], 
-                "city_category" : [self.city_category],
-                "stay_in_current_city_years" : [self.stay_in_current_city_years], 
-                "marital_status" : [self.marital_status], 
-                "product_category_1" : [self.product_category_1], 
-                "product_category_2" : [self.product_category_2], 
-                "product_category_3" : [self.product_category_3], 
+                "Gender" : [self.gender],
+                "Age" : [self.age],
+                "Occupation" : [self.occupation], 
+                "City_Category" : [self.city_category],
+                "Stay_In_Current_City_Years" : [self.stay_in_current_city_years], 
+                "Marital_Status" : [self.marital_status], 
+                "Product_Category_1" : [self.product_category_1], 
+                "Product_Category_2" : [self.product_category_2], 
+                "Product_Category_3" : [self.product_category_3], 
 
             }
 
@@ -103,6 +107,8 @@ class BlackFridayPredictor:
         """
         try:
             logging.info("Entered predict method of BlackFridayPredictor class")
+            logging.info(f"user dataframe: {dataframe}")
+
             model = BlackFridayEstimator(
                 bucket_name=self.prediction_pipeline_config.model_bucket_name,
                 model_path=self.prediction_pipeline_config.model_file_path,

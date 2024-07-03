@@ -3,6 +3,7 @@ from black_friday.exception import BlackFridayException
 from black_friday.entity.estimator import BlackFridayModel
 import sys
 from pandas import DataFrame
+from black_friday.logger import logging
 
 
 class BlackFridayEstimator:
@@ -61,6 +62,8 @@ class BlackFridayEstimator:
         try:
             if self.loaded_model is None:
                 self.loaded_model = self.load_model()
+            logging.info(f"bucket name and model path: {self.bucket_name,self.model_path}")
+
             return self.loaded_model.predict(dataframe=dataframe)
         except Exception as e:
             raise BlackFridayException(e, sys)

@@ -56,16 +56,16 @@ class DataTransformation:
         try:
             logging.info("Got numerical cols from schema config")
 
-            class LabelEncoderTransformer(BaseEstimator, TransformerMixin):
-                def __init__(self):
-                    self.label_encoder = LabelEncoder()
+            # class LabelEncoderTransformer(BaseEstimator, TransformerMixin):
+            #     def __init__(self):
+            #         self.label_encoder = LabelEncoder()
 
-                def fit(self, X, y=None):
-                    self.label_encoder.fit(X.squeeze())
-                    return self
+            #     def fit(self, X, y=None):
+            #         self.label_encoder.fit(X.squeeze())
+            #         return self
 
-                def transform(self, X):
-                    return self.label_encoder.transform(X.squeeze()).reshape(-1, 1)
+            #     def transform(self, X):
+            #         return self.label_encoder.transform(X.squeeze()).reshape(-1, 1)
             age_list = ['0-17', '18-25', '26-35', '36-45', '46-50', '51-55', '55+']    
             oh_encoder = OneHotEncoder(drop='first')
             ordinal_encoder = OrdinalEncoder(categories=[age_list])
@@ -73,18 +73,17 @@ class DataTransformation:
 
             logging.info("Initialized StandardScaler, OneHotEncoder, OrdinalEncoder")
 
-            lab_columns= self._schema_config['lab_columns']
+            # lab_columns= self._schema_config['lab_columns']
             oh_columns = self._schema_config['oh_columns']
             or_columns = self._schema_config['or_columns']
             impute_columns = self._schema_config['impute_columns']
             
             preprocessor = ColumnTransformer(
-                [
-                    ("Label", LabelEncoderTransformer(), lab_columns),
+                transformers=[
                     ("Onehot", oh_encoder, oh_columns),
                     ("Ordinal", ordinal_encoder, or_columns),
                     ("Imputer", most_frequent_imputer, impute_columns)
-                ]
+                ],remainder= 'passthrough'
             )
             logging.info("Created preprocessor object from ColumnTransformer")
 
@@ -118,10 +117,14 @@ class DataTransformation:
                 target_feature_train_df = train_df[TARGET_COLUMN]
 
                 logging.info("Got train features and test features of Training dataset")
+                
+                input_feature_train_df['Gender']=input_feature_train_df['Gender'].map({'F':0,'M':1})
 
                 input_feature_train_df['Stay_In_Current_City_Years'] = input_feature_train_df['Stay_In_Current_City_Years'].str.replace("+", "", regex=False)
 
                 input_feature_train_df['Stay_In_Current_City_Years'] = input_feature_train_df['Stay_In_Current_City_Years'].astype(int)
+                input_feature_train_df['Gender'] = input_feature_train_df['Gender'].astype(int)
+
 
                 logging.info("Transformed ans changed data type of stay column to the Training dataset")
 
@@ -140,9 +143,13 @@ class DataTransformation:
 
                 target_feature_test_df = test_df[TARGET_COLUMN]
 
+                input_feature_test_df['Gender']=input_feature_test_df['Gender'].map({'F':0,'M':1})
+
                 input_feature_test_df['Stay_In_Current_City_Years'] = input_feature_test_df['Stay_In_Current_City_Years'].str.replace("+", "", regex=False)
 
                 input_feature_test_df['Stay_In_Current_City_Years'] = input_feature_test_df['Stay_In_Current_City_Years'].astype(int)
+                input_feature_test_df['Gender'] = input_feature_test_df['Gender'].astype(int)
+
 
                 logging.info("Transformed ans changed data type of stay column to the Training dataset")
 
