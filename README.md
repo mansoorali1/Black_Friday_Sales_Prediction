@@ -55,6 +55,6 @@ This project provides an end-to-end MLOps solution for predicting Black Friday S
 ## Data
 [Dataset](https://github.com/mansoorali1/Black_Friday_Sales_Prediction/blob/main/Data/train.csv)
 ## Output
-![US_Visa_Prediction_App](https://github.com/mansoorali1/US_Visa_Approval_Predicton/assets/73877240/9ce44d98-6038-476c-a57b-15b2354f0b2f)
+![Black Friday Sales_Prediction_App](https://github.com/mansoorali1/Black_Friday_Sales_Prediction/assets/73877240/925ed935-f713-4807-bc65-7d6df655c2e7)
 
 **Youtube URL Deployment https://youtu.be/IbOM4Vc8dQo**
