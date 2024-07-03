@@ -1,4 +1,4 @@
-# Black_Friday_Sales_Prediction
+# Black Friday Sales Prediction
 This project provides an end-to-end MLOps solution for predicting Black Friday Sales. Given specific input features such as Gender, Age, Occupation and etc., the model predicts the Sales Amount. The solution is fully hosted on AWS, leveraging various AWS services for seamless deployment and scalability.
 ## Table of Contents
 - [Architecture](#architecture)
