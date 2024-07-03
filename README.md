@@ -11,15 +11,16 @@ This project provides an end-to-end MLOps solution for predicting Black Friday S
 - [Output](#output)
 
 ## Architecture
-1. Data Ingestion: The data is stored in a MongoDB database and is fetched from there for processing.
+**1. Data Ingestion:** The data is stored in a MongoDB database and is fetched from there for processing.
 
-2. Data Preprocessing: Data cleaning and transformation are performed to prepare the data for model training.
+**2. Data Preprocessing:** Data cleaning and transformation are performed to prepare the data for model training.
 
-3. Model Training: Various models are trained on the preprocessed data such as Linear, Ridge, Lasso Regression, KNN Regression, Random Forest Regression, XGBoost Regression and few others.
+**3. Model Training:** Various models are trained on the preprocessed data such as Linear, Ridge, Lasso Regression, KNN Regression, Random Forest Regression, XGBoost Regression and few others.
 
-4. Model Evaluation: Among the different models Random Forest and XGBoost were the top performers.
+**4. Model Evaluation:** Among the different models Random Forest and XGBoost were the top performers.
 
-5. Deployment: In the deployment phase, the selected model is uploaded to an AWS S3 bucket. FastAPI is used to build the API. A containerized application is created using Github Action, and the Docker image is pushed to Amazon Elastic Container Registry (ECR). This image is then pulled into an EC2 instance, which is connected to GitHub via a self-hosted runner. Whenever code changes or new code is pushed to GitHub, the CI/CD pipeline is triggered, ensuring that the model is continuously integrated and deployed on AWS
+**5. Deployment:** In the deployment phase, the selected model is uploaded to an AWS S3 bucket. FastAPI is used to build the API. A containerized application is created using Github Action, and the Docker image is pushed to Amazon Elastic Container Registry (ECR). This image is then pulled into an EC2 instance, which is connected to GitHub via a self-hosted runner. Whenever code changes or new code is pushed to GitHub, the CI/CD pipeline is triggered, ensuring that the model is continuously integrated and deployed on AWS
+
 ## Languages & Tools
 <div align="">
   <a href="https://www.python.org" target="_blank" rel="noreferrer">
@@ -50,7 +51,9 @@ This project provides an end-to-end MLOps solution for predicting Black Friday S
     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css" width="60" height="60"/>
   </a>
 </div>
+
 ## Directory Structure
+
 ```
 C:.
 │   .dockerignore
@@ -151,7 +154,6 @@ C:.
 │
 ├───templates
         blackfriday.html
-
 ```
 
 ## Data
