@@ -158,6 +158,6 @@ C:.
 ## Output
 ![Black Friday Sales_Prediction_App](https://github.com/mansoorali1/Black_Friday_Sales_Prediction/blob/main/Documents/project_screenshot.png)
 
-**[Youtube URL Deployment](https://youtu.be/y99Lpn8R-gA)**
+**[Youtube Deployment Link](https://youtu.be/y99Lpn8R-gA)**
 
-**[Youtube URL Demo](https://youtu.be/PTTfqvoC80s)**
+**[Youtube Demo Link](https://youtu.be/PTTfqvoC80s)**
